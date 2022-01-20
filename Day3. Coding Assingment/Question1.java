@@ -7,32 +7,37 @@ class Question1
 {
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
-        char matrix[][]= new char [9][9];
-        for(int i=0;i<9;i++){
-            for(int j=0;j<9;j++)
-                matrix[i][j]=sc.next().charAt(0);
+        int size=9;
+        char matrix[][]= new char [size][size];
+
+        // Taking input form user
+        for(int row=0;row<size;row++){
+            for(int col=0;col<size;col++)
+                matrix[row][col]=sc.next().charAt(0);
         }
         
         System.out.println(isValidSudoku(matrix));
     }
 
+    // fun to check validity of sudoku
     private static boolean isValidSudoku(char[][] matrix) {
         int size=9;
-        for(int i=0;i<size;i++){
-            if(validRow(matrix, i))
+        for(int itrator=0;itrator<size;itrator++){
+            if(validRow(matrix, itrator))
                  return false;
             else 
-             if(validColoum(matrix, i))
+             if(validColoum(matrix, itrator))
             
              return false;
              else 
-               for(int j=0;j<size;j++)
-               if(submatrix(matrix, i, j))
+               for(int col_itrator=0;col_itrator<size;col_itrator++)
+               if(submatrix(matrix, itrator, col_itrator))
                 return false;
          }
         return true;
     }
 
+    // function to check the validity of Row ---> if elements are already present it returns true
     public static boolean validRow(char arr[][],int row){
         int size=9;
         
@@ -50,6 +55,7 @@ class Question1
         return false;
     }
 
+    // function to check the validity of coloum ---> if elements are already present it returns true
     public static boolean validColoum(char arr[][], int col){
         int size=9;
         for(int row=0;row< size-1;row++){
@@ -65,6 +71,7 @@ class Question1
         return false;
     }
 
+    // function to check the validity of sub matrix ---> if elements are already present in sub matrix it returns true
     public static boolean submatrix(char arr[][], int row, int col){
         int size=3;
         int boxRowStart = row - row % size;

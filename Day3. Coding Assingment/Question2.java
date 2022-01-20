@@ -18,10 +18,11 @@ class Question2{
         int knight[]= new int[2];
         knight[0]= sc.nextInt();
         knight[1]= sc.nextInt();
-        if(!positionOfBishop(king , bishop) && !positionOfRook(king, rook) && !positionOfQueen(king, queen) && !positionOfKnight(king, knight))
-         System.out.println("Valid");
+        if(!positionOfBishop(king , bishop) && !positionOfRook(king, rook) &&
+         !positionOfQueen(king, queen) && !positionOfKnight(king, knight))
+            System.out.println("Valid");
         else 
-         System.out.println("Invalid");
+            System.out.println("Invalid");
 
     }
     public static boolean positionOfBishop(int king[],int bishop[]){
@@ -54,8 +55,9 @@ class Question2{
         {k_i-1,k_j-2},
         {k_i+1,k_j-2},
         {k_i-1,k_j-2},
-        {k_i+1,k_j-2}};
+        {k_i+1,k_j+2}};
         for(int i=0;i<8;i++){
+            //System.out.println(k_i+1+" "+k_j+2);
             if(positions[i][0]== king[0] && positions[i][1]== king[1])
              return true;
         }
