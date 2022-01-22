@@ -24,10 +24,16 @@ public class Question2 {
             System.out.println(st);
 
         if(str1_itrator< str1_len)                                 //itrative case  --> recurssive call
-            interleaving(str1, str1_len, str1_itrator+1, str2, str2_len, str2_itrator, st+str1.charAt(str1_itrator));
+            {
+                st=st+str1.charAt(str1_itrator);
+                interleaving(str1, str1_len, str1_itrator+1, str2, str2_len, str2_itrator, st);
+            }
 
         if(str2_itrator< str2_len)                                 //itrative case  --> recurssive call
-            interleaving(str1, str1_len, str1_itrator, str2, str2_len, str2_itrator+1, st+str2.charAt(str2_itrator));
+            {
+                st=st+str2.charAt(str2_itrator);
+                interleaving(str1, str1_len, str1_itrator, str2, str2_len, str2_itrator+1, st);
+            }
             
     }
     
