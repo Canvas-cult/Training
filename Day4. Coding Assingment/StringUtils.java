@@ -87,23 +87,79 @@ public class StringUtils {
      }
 
      public static Boolean hasPattern(String str,String pattern){           
-         int flag=1;
-         for(int itrator=0;itrator<str.length(); itrator++){
-             if(pattern.charAt(0)== str.charAt(itrator)){
-                 for(int pattern_itrator=1;pattern_itrator<pattern.length(); pattern_itrator++){
-                    if(pattern.charAt(pattern_itrator)!= str.charAt(itrator+pattern_itrator))
-                        break;
-                    else{
-                        ++flag;
-                        if(pattern_itrator+1== flag)
-                        return true;
-                    }
-                 }
-                 flag=1;
-             }
-         }
-         return false;
-     }
+        //  int flag=1;
+        //  for(int itrator=0;itrator<str.length(); itrator++){
+        //      if(pattern.charAt(0)== str.charAt(itrator)){
+        //          for(int pattern_itrator=1;pattern_itrator<pattern.length(); pattern_itrator++){
+        //             if(pattern.charAt(pattern_itrator)!= str.charAt(itrator+pattern_itrator))
+        //                 break;
+        //             else{
+        //                 ++flag;
+        //                 if(pattern_itrator+1== flag)
+        //                 return true;
+        //             }
+        //          }
+        //          flag=1;
+        //      }
+        //  }
+        //  return false;
+
+        int m = pattern.length();
+        int N = str.length();
+  
+        int lps[] = new int[m];
+        int pattern_itrator = 0; // index for pat[]
+  
+        computeLPSArray(pattern, m, lps);
+  
+        int i = 0; // index for txt[]
+        while (i < N) {
+            if (pattern.charAt(pattern_itrator) == str.charAt(i)) {
+                pattern_itrator++;
+                i++;
+            }
+            if (pattern_itrator == m) {
+                //System.out.println("Found pattern " + "at index " + (i - pattern_itrator));
+                pattern_itrator = lps[pattern_itrator - 1];
+                return true;
+            }
+  
+            // mismatch after j matches
+            else if (i < N && pattern.charAt(pattern_itrator) != str.charAt(i)) {
+                // Do not match lps[0..lps[j-1]] characters,
+                // they will match anyway
+                if (pattern_itrator != 0)
+                    pattern_itrator = lps[pattern_itrator - 1];
+                else
+                    i = i + 1;
+            }
+          }
+            return false;
+        }
+
+     public static void computeLPSArray(String pat, int M, int lps[])
+     {
+        int len = 0;
+        int i = 1;
+        lps[0] = 0;
+        while (i < M) {
+            if (pat.charAt(i) == pat.charAt(len)) {
+                len++;
+                lps[i] = len;
+                i++;
+            }
+            else { 
+                if (len != 0) {
+                    len = lps[len - 1];
+                }
+                else
+                {
+                    lps[i] = len;
+                    i++;
+                }
+            }
+        }
+    }
 
      public static Boolean allWordsContainsChar(String str,char ch){
          str=str+" ";
