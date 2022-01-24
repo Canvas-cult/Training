@@ -1,4 +1,6 @@
-
+/************************************************************************
+ * Write a program to remove duplicate values from an array and returns an array of unique values. int[] removeDuplicates(int[]values)
+ ************************************************************************/
 import java.util.*;
 public class Question1
 {
