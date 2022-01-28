@@ -1,6 +1,6 @@
 
 import java.util.*;
-public class Question2 {
+public class QuestionSecond {
     public static void main(String agrs[])
     {
         Scanner sc =new Scanner(System.in);
