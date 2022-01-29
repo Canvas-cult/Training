@@ -8,12 +8,13 @@ class QuestionTwo{
         Employee clerk= new Employee();
         clerk.name= sc.nextLine();
 
-        Item itemOne= new Item(itemName, itemPrice);
-        itemOne.itemName= sc.next();
-        itemOne.itemPrice= sc.nextDouble();
-        itemOne.discount=sc.nextDouble();
+        String itemName= sc.next();
+        double itemPrice= sc.nextDouble();
+        double discount=sc.nextDouble();
+        Item itemOne= new Item(itemName, itemPrice, discount);
+        
 
-        VegetableBill vegetableBill= new DiscountBill(clerk, prefered);
+        VegetableBill vegetableBill= new DiscountBill(clerk, true);
         vegetableBill.add(itemOne);
         vegetableBill.printReceipt();
     }
@@ -44,11 +45,11 @@ class VegetableBill{
 
     public void printReceipt(){
         System.out.println("Name:\t"+ clerk.name);
-        System.out.println("itemList: "+"\tCost"+"\tDiscount in Percentage"+"Price After Discount");
+        System.out.println("Items "+"\tCost"+"\tDiscount"+"\tPrice After Discount");
         for (Item item : itemList) {
-            System.out.println(itemList.itemName+"\t"+itemList.itemPrice+"\t");
+            System.out.println(item.itemName+"\t"+item.itemPrice +"\t"+ item.discount);
          }
-        System.out.println("Total Cost:\t"+getTotal());
+        System.out.println("\n Total Cost:\t"+getTotal());
     }
 
 }
@@ -57,11 +58,12 @@ class Item{
     
     String itemName;
     double itemPrice;
-    double discount=0.0;
+    double discount;
 
     Item(String itemName, double itemPrice){
         this.itemName= itemName;
         this.itemPrice =itemPrice;
+
     }
 
     Item(String itemName, double itemPrice, double discount){
@@ -94,8 +96,8 @@ class DiscountBill extends VegetableBill{
         int count=0; 
         if(!prefered)
          return count;
-        for (VegetableBill item : itemList) {
-            if(itemList.discount>0)
+        for (Item item : itemList) {
+            if(item.discount > 0 )
                 count++;
         }
         return count;
@@ -106,7 +108,7 @@ class DiscountBill extends VegetableBill{
         double priceAfterDiscount= getTotal();
         double price;
         
-        for (VegetableBill item : itemList) {
+        for (Item item : itemList) {
             if(item.discount>0)
                 priceAfterDiscount-=item.discount;
         }
@@ -115,7 +117,7 @@ class DiscountBill extends VegetableBill{
     }
 
     public double getDiscountPercent(){
-        double price= itemList.getTotal();
+        double price= getTotal();
         double priceAfterDiscount= getDiscountAmount();
          return (priceAfterDiscount/price)* 100;
     }
