@@ -14,9 +14,10 @@ class QuestionOne{
         Item itemOne= new Item(itemName, itemPrice, discount);
         
 
-        VegetableBill vegetableBill= new DiscountBill(clerk, true);
+        DiscountBill vegetableBill= new DiscountBill(clerk, !true);
         vegetableBill.add(itemOne);
         vegetableBill.printReceipt();
+        vegetableBill.getDiscountAmount();
     }
 }
 class VegetableBill{
@@ -31,9 +32,8 @@ class VegetableBill{
 
     public void add(Item i){
         
-        itemList.add(new Item(i.itemName, i.itemPrice));
+        itemList.add(new Item(i.itemName, i.itemPrice, i.discount));
     }
-
     public double getTotal(){
 
         double totalSum=0;
@@ -42,15 +42,14 @@ class VegetableBill{
         }
         return totalSum;
     }
-
     public void printReceipt(){
         System.out.println("Name:\t"+ clerk.name);
-        System.out.println("Items "+"\tCost"+"\tDiscount"+"\tPrice After Discount");
+        System.out.println("Items "+"\tCost"+"\tDiscount"+"   Price After Discount");
         for (Item item : itemList) {
             System.out.println(item.itemName+"\t"+item.itemPrice +"\t"+ item.discount);
          }
-        System.out.println("\n Total Cost:\t"+getTotal());
-        //System.out.println("Cost after Discount:\t"+ getDiscount());
+        System.out.println("\nTotal Cost:\t"+getTotal());
+              
     }
 
 }
@@ -71,6 +70,7 @@ class Item{
         this.itemName= itemName;
         this.itemPrice =itemPrice;
         this.discount= discount;
+        //System.out.println( this. discount);
     }
 
     public double getPrice(){
@@ -84,7 +84,7 @@ class Item{
 
 class DiscountBill extends VegetableBill{
 
-    Item item;
+    //Item item;
     boolean prefered;
 
     public DiscountBill(Employee clerk, boolean prefered){
@@ -110,10 +110,10 @@ class DiscountBill extends VegetableBill{
         double price;
         
         for (Item item : itemList) {
-            if(item.discount>0)
+            if(item.discount>0 && prefered)
                 priceAfterDiscount-=item.discount;
         }
-        
+        System.out.println("Cost after Discount:\t"+ priceAfterDiscount);
         return priceAfterDiscount;
     }
 

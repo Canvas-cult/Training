@@ -58,7 +58,7 @@ class Box{
     double width;;
     double area;
     Flute flute;
-     Box(double length,double height, ouble width,  Flute flute){
+     Box(double length,double height, double width,  Flute flute){
         this.length= length;
         this.height =height;
         this.width= width;
@@ -179,6 +179,8 @@ class F extends Flute{
 
 class Stitching{
 
+    public double pinCost;
+
 }
 
 class Pin extends Stitching{
@@ -192,10 +194,10 @@ class Pin extends Stitching{
 
 class Pasting extends Stitching{
 
-    final double pastingCostUniversal = 20;
-    final double pastingCostAllFlapMeeting = 30;
-    final double pastingCostHoneyComb = 40;
-    final double pastingCostReverseTuckIn = 40;
-    final double pastingCosTopOpeningSnapLock = 50;
+    final double PASTING_COST_UNIVERSAL = 20;
+    final double PASTING_COST_ALL_FLAP_MEETING = 30;
+    final double PASTING_COST_HONEY_COMB = 40;
+    final double PASTING_COST_REVERSE_TUCKIN = 40;
+    final double PASTING_COST_TOP_OPENING_SNAP_LOCKING = 50;
 
 }
